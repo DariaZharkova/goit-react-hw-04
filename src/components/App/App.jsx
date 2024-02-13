@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import { fetchImages } from '../../api';
 import { SearchBox } from '../SearchBox/SearchBox';
 import { ImageGallery } from '../ImageGallery/ImageGallery';
 import { LoadMoreBtn } from '../LoadMoreBtn/LoadMoreBtn';
+import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
+import { Loader } from '../Loader/Loader';
 
 export const App = () => {
   const [query, setQuery] = useState('');
@@ -35,6 +37,12 @@ export const App = () => {
         const fetchedData = await fetchImages(query.split('/')[1], page);
         setImages(prevImages => [...prevImages, ...fetchedData.results]);
         setShowBtn(fetchedData.total_pages !== page);
+        if (fetchedData.total_pages === 0) {
+          toast.error(
+            'Nothing was found for your search, please try to write another word!'
+          );
+          return;
+        }
       } catch (error) {
         setError(true);
       } finally {
@@ -47,9 +55,10 @@ export const App = () => {
   return (
     <>
       <SearchBox onSearch={searchImages} />
+      <Loader />
       {images.length > 0 && <ImageGallery items={images} />}
-      {error && <b>Oops, there was an error, please try reloading 😭</b>}
-      {loading && <b>Loading articles, please wait...</b>}
+      {error && <ErrorMessage />}
+      {loading && <Loader />}
       {images.length > 0 && !loading && showBtn && (
         <LoadMoreBtn onLoadMoreClick={handleLoadMore} />
       )}
