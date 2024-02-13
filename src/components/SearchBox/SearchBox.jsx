@@ -1,5 +1,6 @@
 import toast from 'react-hot-toast';
 import { GoSearch } from 'react-icons/go';
+import css from './SearchBox.module.css';
 
 export const SearchBox = ({ onSearch }) => {
   const handleSubmit = evt => {
@@ -13,19 +14,18 @@ export const SearchBox = ({ onSearch }) => {
   };
 
   return (
-    <header>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="query"
-          autoComplete="off"
-          autoFocus
-          placeholder="Search images and photos"
-        />
-        <button type="submit">
-          <GoSearch />
-        </button>
-      </form>
-    </header>
+    <form className={css.form} onSubmit={handleSubmit}>
+      <button className={css.btn} type="submit">
+        <GoSearch className={css.icon} />
+      </button>
+      <input
+        className={css.input}
+        type="text"
+        name="query"
+        autoComplete="off"
+        autoFocus
+        placeholder="Search images and photos"
+      />
+    </form>
   );
 };

@@ -1,0 +1,19 @@
+.list {
+  margin-bottom: 25px;
+  display: grid;
+  gap: 20px;
+  max-width: calc(-60px + 100vw);
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+}
+
+.item {
+  transition: box-shadow, 250ms, ease-in-out;
+}
+
+.item:hover,
+.item:focus {
+  cursor: pointer;
+  box-shadow: 0 54px 55px rgba(0, 0, 0, 0.25), 0 -12px 30px rgba(0, 0, 0, 0.12),
+    0 4px 6px rgba(0, 0, 0, 0.12), 0 12px 13px rgba(0, 0, 0, 0.17),
+    0 -3px 5px rgba(0, 0, 0, 0.09);
+}

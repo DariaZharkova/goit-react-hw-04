@@ -6,6 +6,7 @@ import { ImageGallery } from '../ImageGallery/ImageGallery';
 import { LoadMoreBtn } from '../LoadMoreBtn/LoadMoreBtn';
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 import { Loader } from '../Loader/Loader';
+import css from './App.module.css';
 
 export const App = () => {
   const [query, setQuery] = useState('');
@@ -54,15 +55,19 @@ export const App = () => {
 
   return (
     <>
-      <SearchBox onSearch={searchImages} />
-      <Loader />
-      {images.length > 0 && <ImageGallery items={images} />}
-      {error && <ErrorMessage />}
-      {loading && <Loader />}
-      {images.length > 0 && !loading && showBtn && (
-        <LoadMoreBtn onLoadMoreClick={handleLoadMore} />
-      )}
-      <Toaster position="top-right" />
+      <header className={css.header}>
+        <SearchBox onSearch={searchImages} />
+      </header>
+
+      <main className={css.main}>
+        {images.length > 0 && <ImageGallery items={images} />}
+        {error && <ErrorMessage />}
+        {loading && <Loader />}
+        {images.length > 0 && !loading && showBtn && (
+          <LoadMoreBtn onLoadMoreClick={handleLoadMore} />
+        )}
+        <Toaster position="top-right" />
+      </main>
     </>
   );
 };

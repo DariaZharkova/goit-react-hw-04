@@ -23,5 +23,18 @@ ol {
 
 img {
   display: block;
-  max-width: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  padding: 0;
+  border: none;
+}
+
+input {
+  font-family: inherit;
+  outline: transparent;
 }

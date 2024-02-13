@@ -1,0 +1,14 @@
+.header {
+  width: 100%;
+  padding: 15px;
+
+  position: fixed;
+  top: 0;
+
+  background-color: rgba(144, 238, 144, 0.8);
+  box-shadow: 0 20px 30px -10px #26394d;
+}
+
+.main {
+  padding: 100px 25px 40px 25px;
+}

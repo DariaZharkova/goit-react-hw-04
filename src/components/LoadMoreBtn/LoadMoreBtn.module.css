@@ -1,0 +1,12 @@
+.btn {
+  display: block;
+  width: 200px;
+  height: 40px;
+  background-color: rgba(10, 133, 74, 0.633);
+  border-radius: 10px;
+  margin: auto;
+  padding: 8px 16px;
+  font-size: 18px;
+  font-weight: 500;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
+}
