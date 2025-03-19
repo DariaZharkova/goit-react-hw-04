@@ -17,8 +17,8 @@ const customStyles = {
 
 Modal.setAppElement('#root');
 
-export const ImageModal = ({ isOpen, onClose, image }) => {
-  console.log(image.description);
+export const ImageModal = ({ onClose, image }) => {
+  const isOpen = Boolean(image);
   return (
     <Modal
       isOpen={isOpen}
@@ -26,13 +26,17 @@ export const ImageModal = ({ isOpen, onClose, image }) => {
       style={customStyles}
       contentLabel="Image Modal"
     >
-      <img
-        className={css.img}
-        onClick={onClose}
-        src={image.urls.regular}
-        alt={image.description}
-      />
-      <p className={css.descr}>{image.description}</p>
+      {image && (
+        <>
+          <img
+            className={css.img}
+            onClick={onClose}
+            src={image.urls.regular}
+            alt={image.description}
+          />
+          <p className={css.descr}>{image.description}</p>
+        </>
+      )}
     </Modal>
   );
 };

@@ -7,6 +7,7 @@ import { LoadMoreBtn } from '../LoadMoreBtn/LoadMoreBtn';
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 import { Loader } from '../Loader/Loader';
 import css from './App.module.css';
+import { ImageModal } from '../ImageModal/ImageModal';
 
 export const App = () => {
   const [query, setQuery] = useState('');
@@ -15,6 +16,7 @@ export const App = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [showBtn, setShowBtn] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const searchImages = newQuery => {
     setQuery(`${Date.now()}/${newQuery}`);
@@ -24,6 +26,15 @@ export const App = () => {
 
   const handleLoadMore = () => {
     setPage(page + 1);
+  };
+
+  const openModal = image => {
+    console.log('Opening modal with image:', image);
+    setSelectedImage(image);
+  };
+
+  const closeModal = () => {
+    setSelectedImage(null);
   };
 
   useEffect(() => {
@@ -60,13 +71,16 @@ export const App = () => {
       </header>
 
       <main className={css.main}>
-        {images.length > 0 && <ImageGallery items={images} />}
+        {images.length > 0 && (
+          <ImageGallery items={images} openModal={openModal} />
+        )}
         {error && <ErrorMessage />}
         {loading && <Loader />}
         {images.length > 0 && !loading && showBtn && (
           <LoadMoreBtn onLoadMoreClick={handleLoadMore} />
         )}
         <Toaster position="top-right" />
+        <ImageModal onClose={closeModal} image={selectedImage} />
       </main>
     </>
   );
